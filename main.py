@@ -29,10 +29,12 @@ scenarios = [
 ]
 
 if __name__ == "__main__":
-    # print("Scenariusz 1", compute(in_WilgotnoscGleby=10, in_TemperaturaPowietrza=35, in_WilgotnoscPowietrza=30))
-    # print("Scenariusz 2", compute(in_WilgotnoscGleby=10, in_TemperaturaPowietrza=35, in_WilgotnoscPowietrza=90))
-    # print("Scenariusz 3", compute(in_WilgotnoscGleby=20, in_TemperaturaPowietrza=12, in_WilgotnoscPowietrza=80))
-    # print("Scenariusz 4", compute(in_WilgotnoscGleby=32, in_TemperaturaPowietrza=24, in_WilgotnoscPowietrza=65))
+
+    sim = Simulation("bisector")
+    sim.set_input_values(scenarios[3])
+    sim.compute()
+    sim.view_activation()
+    exit()
 
     for i, scenario in enumerate(scenarios):
         sim = Simulation("centroid")
