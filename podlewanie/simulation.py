@@ -24,6 +24,12 @@ class Simulation:
         self.simulation.compute()
         return self.simulation.output["CzasPodlewania"]
 
+    def get_sim(self):
+        return self.simulation
+
+    def get_czas(self):
+        return self.CzasPodlewania
+
     def view_activation(self):
         self.WilgotnoscGleby.view(sim=self.simulation)
         self.TemperaturaPowietrza.view(sim=self.simulation)

@@ -1,44 +1,44 @@
-import matplotlib.pyplot as plt
-import numpy as np
+from matplotlib import pyplot as plt
 
 from podlewanie.simulation import Simulation
+from podlewanie.vars import WilgotnoscGleby, TemperaturaPowietrza, WilgotnoscPowietrza, get_CzasPodlewania_var
 
-METHODS = ("centroid", "lom", "bisector")
+METHODS = ("centroid", "som", "bisector")
 
 scenarios = [
     {
-        "WilgotnoscGleby":      10,
+        "WilgotnoscGleby":      12,
         "TemperaturaPowietrza": 35,
         "WilgotnoscPowietrza":  30,
     },
     {
-        "WilgotnoscGleby":      10,
-        "TemperaturaPowietrza": 35,
-        "WilgotnoscPowietrza":  90,
+        "WilgotnoscGleby":      21,
+        "TemperaturaPowietrza": 28,
+        "WilgotnoscPowietrza":  75,
     },
     {
-        "WilgotnoscGleby":      20,
-        "TemperaturaPowietrza": 12,
-        "WilgotnoscPowietrza":  80,
-    },
-    {
-        "WilgotnoscGleby":      32,
+        "WilgotnoscGleby":      22,
         "TemperaturaPowietrza": 24,
         "WilgotnoscPowietrza":  65,
+    },
+    {
+        "WilgotnoscGleby":      22,
+        "TemperaturaPowietrza": 30,
+        "WilgotnoscPowietrza":  50,
     },
 ]
 
 if __name__ == "__main__":
 
     sim = Simulation("bisector")
-    sim.set_input_values(scenarios[3])
-    sim.compute()
-    sim.view_activation()
-    exit()
 
-    for i, scenario in enumerate(scenarios):
-        sim = Simulation("centroid")
+    x = sim.WilgotnoscPowietrza.universe
+    for scenario in scenarios:
+        y = []
         sim.set_input_values(scenario)
-        print(f"\nScenariusz {i+1}")
-        print(scenario)
-        print(sim.compute())
+        for _x in x:
+            sim.set_input_values({"WilgotnoscPowietrza": _x})
+            y.append(sim.compute())
+        plt.plot(x, y)
+        plt.show()
+
